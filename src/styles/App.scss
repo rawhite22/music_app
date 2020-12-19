@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap');
+@import './variables';
 
 * {
   margin: 0;
@@ -8,4 +9,8 @@
 
 body {
   font-family: 'Work Sans', sans-serif;
+  background: $lightest-color;
 }
+
+@import './player';
+@import './song';
