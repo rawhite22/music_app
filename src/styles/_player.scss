@@ -26,5 +26,9 @@
   justify-content: space-between;
   svg {
     cursor: pointer;
+    color: $darkest-color;
+    &:hover {
+      color: $darker-color;
+    }
   }
 }
