@@ -5,14 +5,21 @@ import {
   faPlayCircle,
   faForward,
   faBackward,
+  faPauseCircle,
 } from '@fortawesome/pro-duotone-svg-icons';
 
-const Player = ({ currentSong }) => {
+const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
   // refs
   const audioRef = useRef(null);
   // events
   const playSongHandler = () => {
-    console.log(audioRef.current);
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(!isPlaying);
+    } else {
+      audioRef.current.play();
+      setIsPlaying(!isPlaying);
+    }
   };
   return (
     <div className='player'>
@@ -27,7 +34,7 @@ const Player = ({ currentSong }) => {
           onClick={playSongHandler}
           size='4x'
           className='play'
-          icon={faPlayCircle}
+          icon={isPlaying ? faPauseCircle : faPlayCircle}
         />
         <FontAwesomeIcon size='3x' className='skip-forward' icon={faForward} />
       </div>
