@@ -4,4 +4,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  img {
+    width: 50%;
+    border-radius: 10%;
+  }
+  p {
+    padding-top: 1rem;
+    font-size: 3rem;
+    font-weight: lighter;
+    &:last-child {
+      padding: 1rem 0;
+      font-size: 1.5rem;
+    }
+  }
 }
