@@ -23,7 +23,7 @@
 
 .play-control {
   display: flex;
-  width: 25%;
+  width: 35%;
   align-items: center;
   justify-content: space-between;
   svg {
@@ -31,6 +31,7 @@
     color: $darkest-color;
     &:hover {
       color: $darker-color;
+      scale: 1.2;
     }
   }
 }
