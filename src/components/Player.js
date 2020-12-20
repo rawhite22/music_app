@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -9,6 +9,11 @@ import {
 } from '@fortawesome/pro-duotone-svg-icons';
 
 const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
+  // state
+  const [songInfo, setSongInfo] = useState({
+    current: null,
+    duration: null,
+  });
   // refs
   const audioRef = useRef(null);
   // events
@@ -21,12 +26,24 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
       setIsPlaying(!isPlaying);
     }
   };
+  const timeUpdateHandler = (e) => {
+    const current = e.target.currentTime;
+    const duration = e.target.duration;
+    setSongInfo({ current, duration });
+  };
+
+  const getTime = (time) => {
+    return (
+      Math.floor(time / 60) + ':' + ('0' + Math.floor(time % 60)).slice(-2)
+    );
+  };
+
   return (
     <div className='player'>
       <div className='time-control'>
-        <p>start time</p>
+        <p>{getTime(songInfo.current)}</p>
         <input type='range' name='' id='' />
-        <p>end time</p>
+        <p>{getTime(songInfo.duration)}</p>
       </div>
       <div className='play-control'>
         <FontAwesomeIcon size='3x' className='skip-back' icon={faBackward} />
@@ -38,7 +55,10 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
         />
         <FontAwesomeIcon size='3x' className='skip-forward' icon={faForward} />
       </div>
-      <audio ref={audioRef} src={currentSong.audio}></audio>
+      <audio
+        onTimeUpdate={timeUpdateHandler}
+        ref={audioRef}
+        src={currentSong.audio}></audio>
     </div>
   );
 };
